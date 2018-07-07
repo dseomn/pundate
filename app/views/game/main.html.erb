@@ -1,0 +1,38 @@
+<h1>PunDate</h1>
+
+<p>This may well be the best dating website ever, if what you want is to guess the dates of various events.</p>
+
+<p>Want to contribute? <%= link_to 'Add an event', new_event_path %>.</p>
+
+
+<% if @guessed_event && @guessed_date %>
+<h2>Your Results</h2>
+
+<p><%= @guessed_event.title %></p>
+
+<p>You guessed: <%= @guessed_date %></p>
+
+<p>Actual: <%= @guessed_event.date %></p>
+
+<p>Difference: <%= distance_of_time_in_words @guessed_event.date, @guessed_date %></p>
+<% end %>
+
+
+<h2>Let's Play!</h2>
+
+<p><%= @new_event.title %></p>
+
+<% if !@new_event.description.blank? %>
+  <p><%= @new_event.description %></p>
+<% end %>
+
+<%= form_with scope: :guess, local: true do |form| %>
+  <%= form.hidden_field :event_id, value: @new_event.id %>
+
+  <p>
+    <%= form.label :date, 'When do you think this happened?' %>
+    <%= form.date_select :date %>
+  </p>
+
+  <p><%= form.submit 'Guess it so!' %></p>
+<% end %>

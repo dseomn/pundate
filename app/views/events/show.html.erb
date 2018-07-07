@@ -1,0 +1,13 @@
+<h1>Event: <%= @event.title %></h1>
+
+<p>Date: <%= @event.date %></p>
+
+<p>
+  <% if @event.description.blank? %>
+    <em>No description provided</em>
+  <% else %>
+    <%= @event.description %>
+  <% end %>
+</p>
+
+<p><%= link_to 'Back to the game', root_path %>? <%= link_to 'Add another event', new_event_path %>?</p>
